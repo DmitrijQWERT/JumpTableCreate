@@ -24,5 +24,28 @@ namespace JumpTableCreate
         {
             InitializeComponent();
         }
+        /// <summary>
+        /// Обработка нажатия щапуска генерации.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnGenerate_Click(object sender, RoutedEventArgs e)
+        {
+            ArgToInt();
+            MessageBox.Show("Генерация таблицы переходов и выходов.",
+                            "Информация",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Information);
+        }
+        /// <summary>
+        /// Получение параметров таблицы переходов/выходов
+        /// </summary>
+        public void ArgToInt()
+        {
+            int countInputI = Convert.ToInt32(countInput.Text);
+            int countOutputI = Convert.ToInt32(countOutput.Text);
+            int countCycleI = Convert.ToInt32(countCycle.Text);
+            int countJumpI = Convert.ToInt32(countJump.Text);
+        }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JumpTableCreate"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Генератор таблицы переходов и выходов" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -23,5 +23,6 @@
         <TextBox x:Name="countCycle" HorizontalAlignment="Left" Margin="260,110,0,0" Text="3" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <Label Content="Максимальное количество состояний:" HorizontalAlignment="Left" Margin="40,140,0,0" FontSize="10" VerticalAlignment="Top"/>
         <TextBox x:Name="countJump" HorizontalAlignment="Left" Margin="225,140,0,0" Text="9" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <Button x:Name="btnGenerate" Content="Генерация" HorizontalAlignment="Left" Margin="150,170,0,0" VerticalAlignment="Top" Click="btnGenerate_Click"/>
     </Grid>
 </Window>
