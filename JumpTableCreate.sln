@@ -4,6 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.29509.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JumpTableCreate", "JumpTableCreate\JumpTableCreate.csproj", "{CA16E62A-28E7-44CC-AB3A-0BE2C881FD70}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BC71787E-758C-4862-9FB2-9240F3DC35A2} = {BC71787E-758C-4862-9FB2-9240F3DC35A2}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreateTable", "CreateTable\CreateTable.csproj", "{BC71787E-758C-4862-9FB2-9240F3DC35A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +20,10 @@ Global
 		{CA16E62A-28E7-44CC-AB3A-0BE2C881FD70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA16E62A-28E7-44CC-AB3A-0BE2C881FD70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA16E62A-28E7-44CC-AB3A-0BE2C881FD70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC71787E-758C-4862-9FB2-9240F3DC35A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC71787E-758C-4862-9FB2-9240F3DC35A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC71787E-758C-4862-9FB2-9240F3DC35A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC71787E-758C-4862-9FB2-9240F3DC35A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
