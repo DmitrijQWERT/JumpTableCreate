@@ -115,7 +115,7 @@ namespace JumpTableCreate
                 TableRow currentRow = table.RowGroups[0].Rows[i + 1];
                 for (int j = 1; j <= Math.Pow(2, CountInputI); j++)
                 {
-                    currentRow.Cells.Add(new TableCell(new Paragraph(new Run(StringTable[i - 1,j - 1]))));
+                    currentRow.Cells.Add(new TableCell(new Paragraph(new Run(StringTable[i - 1, j - 1]))));
                 }
             }
         }
