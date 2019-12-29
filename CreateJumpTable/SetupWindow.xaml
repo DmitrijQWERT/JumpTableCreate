@@ -1,0 +1,106 @@
+﻿<Window x:Class="CreateJumpTable.SetupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        DataContext="{Binding ViewModel, RelativeSource={RelativeSource Self}}"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CreateJumpTable"
+        mc:Ignorable="d"
+        Title="Setup Window" Height="350" Width="400">
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="Background" Value="Pink" />
+                    <Setter Property="Foreground" Value="Black" />
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self},
+            Path=(Validation.Errors)[0].ErrorContent}" />
+                </Trigger>
+            </Style.Triggers>
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <DockPanel LastChildFill="True">
+                            <TextBlock Foreground="Red" FontSize="20" Text="!"
+                                           ToolTip="{Binding ElementName=controlWithError,
+                                           Path=AdornedElement.(Validation.Errors)[0].ErrorContent}" />
+                            <Border BorderBrush="Red" BorderThickness="1">
+                                <AdornedElementPlaceholder Name="controlWithError" />
+                            </Border>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid IsSharedSizeScope="True" Margin="5,0,5,5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="SetupLabels" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Content="PreSet" />
+            <ComboBox Name="cboSetupJump" Grid.Column="1" DisplayMemberPath="PreSetName" ItemsSource="{Binding SetupJump}" />
+        </Grid>
+        <Grid Grid.Row="1" Name="DetailsGrid" DataContext="{Binding ElementName=cboSetupJump, Path=SelectedItem}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="CarLabels" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Grid.Row="0" Content="PreSet Id" />
+            <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=PreSetId, ValidatesOnDataErrors=True}" />
+            <Label Grid.Column="0" Grid.Row="1" Content="Кол-во Xi" />
+            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=CountInputI, ValidatesOnDataErrors=True}" Name="CountInputI"/>
+            <Label Grid.Column="0" Grid.Row="2" Content="Кол-во Zi" />
+            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=CountOutputI, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Name="CountOutputI"/>
+            <Label Grid.Column="0" Grid.Row="3" Content="Кол-во циклов" />
+            <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=CountCycleI, ValidatesOnDataErrors=True}" Name="CountCycleI"/>
+            <Label Grid.Column="0" Grid.Row="4" Content="Max Si" />
+            <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=CountJumpI, ValidatesOnDataErrors=True}" Name="CountJumpI"/>
+            <Label Grid.Column="0" Grid.Row="5" Content="PreSet Name" />
+            <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Path=PreSetName, ValidatesOnDataErrors=True}" Name="PreSetName" />
+            <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6"
+                            HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,5,0,5">
+                <Button x:Name="btnAddPreSet" Content="Add PreSet" Margin="5,0,5,0" Padding="4, 2"
+                            Command="{Binding Path=DataContext.AddPreSetCmd, 
+                            RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+                            CommandParameter="{Binding ElementName=cboSetupJump, Path=ItemsSource}"/>
+                <Button x:Name="btnDeletePreSet" Content="Delete PreSet" Margin="5,0,5,0" Padding="4, 2"
+                            Command="{Binding Path=DataContext.DeletePreSetCmd, 
+                            RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+                            CommandParameter="{Binding ElementName=cboSetupJump, Path=SelectedItem}" />
+                <Button x:Name="btnSave" Content="Save" Margin="5,0,5,0" Padding="4, 2" 
+                            Command="{Binding Path=DataContext.SaveCmd, 
+                            RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+                            CommandParameter="{Binding ElementName=cboSetupJump, Path=ItemsSource}" Click="btnSave_Click" />
+            </StackPanel>
+            <Label Grid.Column="0" Grid.Row="7" Content="Is Changed" />
+            <CheckBox Grid.Column="1" Grid.Row="7" VerticalAlignment="Center"
+                          Margin="10,0,0,0" IsEnabled="False"
+                          IsChecked="{Binding Path=IsChanged, ValidatesOnDataErrors=True}" />
+            <ListBox Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2"
+                         ItemsSource="{Binding ElementName=DetailsGrid, Path=(Validation.Errors)}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <ListBox ItemsSource="{Binding Path=ErrorContent}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+    </Grid>
+</Window>
